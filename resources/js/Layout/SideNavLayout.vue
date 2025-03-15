@@ -33,7 +33,7 @@ function toggleSidebar() {
                         <span class="ml-3">Dashboard</span>
                     </Link>
                 </li>
-                <li v-if="page.props.user.role=='superadmin'">
+                <li v-if="page.props.user.role == 'superadmin'">
                     <Link
                         href="/user-page"
                         class="flex items-center px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-900"

@@ -4,9 +4,6 @@ import { ref } from "vue";
 
 const page = usePage();
 
-
-
-const props = defineProps(["name"]);
 const show = ref(false);
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("-translate-x-full");
@@ -29,14 +26,11 @@ function toggleSidebar() {
         </div>
         <nav class="flex-1 p-4">
             <ul class="space-y-2">
-                <li>
-                    <Link
-                        href="/dashboard-page"
-                        class="flex items-center px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-900"
-                    >
-                        <span class="material-icons">dashboard</span>
-                        <span class="ml-3">Dashboard</span>
-                    </Link>
+                <li   class="flex items-center px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-900">
+
+                        <span class="material-icons">history</span>
+                        <span class="ml-3">Order History</span>
+
                 </li>
 
             </ul>

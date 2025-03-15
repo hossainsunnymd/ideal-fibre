@@ -20,7 +20,7 @@ const form = useForm({
     id: id
 })
 
-let list = page.props.user;
+let list = page.props.users;
 
 let URL='/create-user';
 if(id !==0 && list !== null ){
