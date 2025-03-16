@@ -19,9 +19,9 @@ const headers = [
 const items = ref(page.props.users);
 
 const deleteUser = (id) => {
-    if (confirm("Are you sure you want to delete this customer?")) {
-        router.get(`/delete-customer?id=${id}`);
-        toaster.success("Customer deleted successfully");
+    if (confirm("Are you sure you want to delete this user?")) {
+        router.get(`/delete-user?id=${id}`);
+        toaster.success("User deleted successfully");
     }
 };
 </script>
@@ -52,7 +52,7 @@ const deleteUser = (id) => {
                     Edit
                 </Link>
                 <button
-                    @click="deleteUser(name)"
+                    @click="deleteUser(id)"
                     class="bg-red-500 ml-1 text-white font-bold py-2 px-4 rounded"
                 >
                     Delete

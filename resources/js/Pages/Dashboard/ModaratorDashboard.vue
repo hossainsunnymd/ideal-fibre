@@ -39,7 +39,8 @@ const openModal = (id) => {
 
 
 const updateOrder = () => {
-    router.get(`/delivered-work-order?id=${invoiceProductid.value} && orderQty=${orderQty.value} && delivered_by=${delivered_by.value}`);
+    router.get(`/delivered-work-order?id=${invoiceProductid.value}&orderQty=${orderQty.value}&delivered_by=${delivered_by.value}`);
+
     showModal.value = !showModal.value;
 }
 

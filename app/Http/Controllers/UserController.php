@@ -150,7 +150,6 @@ class UserController extends Controller
 
 
     public function createUser(Request $request){
-        // return 'ok';
         $request->validate([
             'name'=>'required|string',
             'email'=>'required|email|unique:users',
@@ -168,5 +167,30 @@ class UserController extends Controller
         ];
         User::create($data);
         return redirect()->back()->with(['status'=>true,'message'=>'User created successfully','error'=>'']);
+    }
+
+    public function updateUser(Request $request){
+        $request->validate([
+            'name'=>'required|string',
+            'password'=>'required|min:8',
+            'mobile'=>'required',
+            'role'=>'required',
+        ]);
+        $data=[
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'mobile'=>$request->mobile,
+            'role'=>$request->role,
+        ];
+        $id=$request->id;
+        User::where('id','=',$id)->update($data);
+        return redirect()->back()->with(['status'=>true,'message'=>'User updated successfully','error'=>'']);
+    }
+
+    public function deleteUser(Request $request){
+        $id=$request->id;
+        User::where('id','=',$id)->delete();
+        return redirect()->back()->with(['status'=>true,'message'=>'User deleted successfully','error'=>'']);
     }
 }

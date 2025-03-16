@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,8 @@ class SessionAuthenticateMiddleware
     {
         $email=$request->session()->get('email','default');
         $user_id=$request->session()->get('user_id','default');
-        if($email=="default"){
+        $count=User::where('email','=',$email)->where('id','=',$user_id)->count();
+        if($email=="default" || $count==0){
             return redirect('/login-page');
         }
         else{

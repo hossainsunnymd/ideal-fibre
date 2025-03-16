@@ -9,7 +9,9 @@ use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\SessionAuthenticateMiddleware;
+use App\Http\Middleware\SuperAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 //HomePage
@@ -36,10 +38,10 @@ Route::get('/moderator-dashboard', [ModeratorController::class, 'moderatorDashbo
 
 
 // ================== Middleware Protected Routes ==================
-Route::middleware([SessionAuthenticateMiddleware::class])->group(function () {
+Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])->group(function () {
 
     //user
-    Route::post('/create-user', [UserController::class, 'createUser'])->name('createUser');
+
 
     // Dashboard Routes
     Route::get('/dashboard-page', [DashboardController::class, 'dashboardPage'])->name('dashboardPage');
@@ -69,7 +71,7 @@ Route::middleware([SessionAuthenticateMiddleware::class])->group(function () {
 });
 
 // ================== Page Routes ==================
-Route::middleware([SessionAuthenticateMiddleware::class])->group(function () {
+Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])->group(function () {
     // Customer Pages
     Route::get('/customer-page', [CustomerController::class, 'customerPage'])->name('customerPage');
     Route::get('/customer-save-page', [CustomerController::class, 'customerSavePage'])->name('customerSavePage');
@@ -85,12 +87,19 @@ Route::middleware([SessionAuthenticateMiddleware::class])->group(function () {
     //delivery history page
     Route::get('/delivery-history-page', [HistoryController::class, 'deliveryHistory'])->name('deliveryHistory');
 
-     //users
-     Route::get('/user-page', [UserController::class, 'userPage'])->name('userPage');
-     Route::get('/user-save-page', [UserController::class, 'userSavePage'])->name('userSavePage');
+
 
 
 });
 
+Route::middleware([SessionAuthenticateMiddleware::class,SuperAdminMiddleware::class])->group(function () {
 
+  //users
+    Route::get('/user-page', [UserController::class, 'userPage'])->name('userPage');
+    Route::get('/user-save-page', [UserController::class, 'userSavePage'])->name('userSavePage');
+    Route::post('/create-user', [UserController::class, 'createUser'])->name('createUser');
+    Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
+    Route::get('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
+
+    });
 
