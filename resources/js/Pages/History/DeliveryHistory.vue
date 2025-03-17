@@ -19,7 +19,7 @@ const headers = [
 ];
 
 const items = ref(page.props.list);
-
+console.log(items);
 
 const formatDate = (date) => {
     return new Date(date).toISOString().split("T")[0];

@@ -14,9 +14,9 @@ const customer=ref();
 const page = usePage();
 
 const searchValue = ref();
-const searchField = ref(["customer.name"]);
+const searchField = ref(["customer.name","id"]);
 const headers = [
-    { text: "No", value: "id" },
+    { text: "Invoice no", value: "id" },
     { text: "Party Name", value: "customer.name" },
     { text: "Moblie", value: "customer.mobile" },
     { text: "Total Work Order", value: "total_work_order" },

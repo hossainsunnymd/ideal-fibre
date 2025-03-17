@@ -63,7 +63,7 @@ class InvoiceController extends Controller
         $total = Invoice::when($request->query('fromDate') && $request->query('toDate'), function ($query) use ($request) {
             $fromDate = date('Y-m-d', strtotime($request->fromDate));
             $toDate = date('Y-m-d', strtotime($request->toDate));
-            $query->where('created_at', '>=', $fromDate)->where('created_at', '<=', $toDate);
+            $query->whereDate('created_at', '>=', $fromDate)->whereDate('created_at', '<=', $toDate);
         })->sum('total');
 
         return Inertia::render('Invoice/InvoiceListPage', [
@@ -77,6 +77,7 @@ class InvoiceController extends Controller
         DB::beginTransaction();
         try {
             $invoiceId = $request->input('id');
+            CompleteWorkOrder::where('invoice_id', '=', $invoiceId)->delete();
             InvoiceProduct::where('invoice_id', '=', $invoiceId)->delete();
             Invoice::where('id', '=', $invoiceId)->delete();
             DB::commit();
@@ -86,5 +87,15 @@ class InvoiceController extends Controller
             DB::rollBack();
             return redirect()->route('listInvoice')->with(['status' => false, 'message' => 'Something went wrong']);
         }
+    }
+
+    public function updateWorkOrder(Request $request){
+        $completeWorkOrder=$request->input('complete_work_order');
+        $incompleteWorkOrder=$request->input('incomplete_work_order');
+        InvoiceProduct::where('id','=',$request->input('id'))->update([
+            'complete_work_order'=>$completeWorkOrder,
+            'incomplete_work_order'=>$incompleteWorkOrder
+        ]);
+        return redirect()->back()->with(['status'=>true,'message'=>'Work order updated successfully']);
     }
 }

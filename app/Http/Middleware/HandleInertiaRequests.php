@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use PhpParser\Node\Expr\Cast\String_;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -33,8 +35,10 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-    public function share(Request $request): array
+    public function share(Request $request):array
     {
+
+
         return array_merge(parent::share($request), [
 
             'user'=>[

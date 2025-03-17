@@ -8,16 +8,18 @@ const toaster = createToaster({ });
 const page = usePage();
 
 const searchValue = ref();
-const searchField = ref(["name"]);
+const searchField = ref(["name","invoice_id"]);
 const headers = [
     { text: "No", value: "id" },
     { text: "Party Name", value: "invoice.customer.name", sortable: true },
     { text: "Description", value: "product.decription", sortable: true },
+    { text: "Invoice no", value: "invoice_id", sortable: true },
     { text: "Work Order", value: "qty", sortable: true },
     { text: "Incomplete Work Order", value: "incomplete_work_order", sortable: true },
     { text: "Complete Work Order", value: "complete_work_order", sortable: true },
     { text: "Action", value: "action" },
 ];
+console.log(page.props.invoice);
 
 const items = ref(page.props.invoice);
 const showModal = ref(false);

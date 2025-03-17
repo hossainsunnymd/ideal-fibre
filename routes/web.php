@@ -36,6 +36,9 @@ Route::get('/send-otp-page', [UserController::class, 'sendOtpPage'])->name('send
 Route::get('/verify-otp-page', [UserController::class, 'verifyOtpPage'])->name('verifyOtpPage');
 Route::get('/moderator-dashboard', [ModeratorController::class, 'moderatorDashboard'])->name('modaratorDashboard')->middleware(SessionAuthenticateMiddleware::class);
 
+//work order
+Route::get('/delivered-work-order', [ModeratorController::class, 'deliviredWorkOrder'])->name('deliviredWorkOrder')->middleware(SessionAuthenticateMiddleware::class);
+
 
 // ================== Middleware Protected Routes ==================
 Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])->group(function () {
@@ -66,8 +69,10 @@ Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])
     Route::post('/create-invoice', [InvoiceController::class, 'createInvoice'])->name('createInvoice');
     Route::get('/delete-invoice', [InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
 
-       //work order
-    Route::get('/delivered-work-order', [ModeratorController::class, 'deliviredWorkOrder'])->name('deliviredWorkOrder');
+    //update work order
+    Route::post('/update-work-order', [InvoiceController::class, 'updateWorkOrder'])->name('updateWorkOrder');
+
+;
 });
 
 // ================== Page Routes ==================
@@ -86,6 +91,12 @@ Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])
 
     //delivery history page
     Route::get('/delivery-history-page', [HistoryController::class, 'deliveryHistory'])->name('deliveryHistory');
+
+    //order history page
+    Route::get('/order-history-page', [HistoryController::class, 'orderHistory'])->name('orderHistory');
+
+    //order save page
+    Route::get('/order-save-page', [HistoryController::class, 'orderSavePage'])->name('orderSavePage');
 
 
 

@@ -77,7 +77,7 @@ class UserController extends Controller
 
            }else{
 
-                return redirect()->route('loginPage')->with(['message'=>'User login Fail','status'=>false,'error'=>'something went wrong','name'=>'']);
+                return redirect()->back()->with(['message'=>'User login Fail','status'=>'fail','error'=>'something went wrong']);
            }
     }
 

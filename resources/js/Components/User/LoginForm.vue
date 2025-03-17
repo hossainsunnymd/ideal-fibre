@@ -12,10 +12,20 @@ const form = useForm({
 
 function submitForm() {
 
-        form.post('/user-login')
-
+        form.post('/user-login',{
+            onSuccess: () => {
+                if(page.props.flash.status===true){
+                    toaster.success(page.props.flash.message);
+                }
+                else {
+                    toaster.error(page.props.flash.message)
+                }
+            }
+        })
 
 }
+
+
 </script>
 
 <template>
