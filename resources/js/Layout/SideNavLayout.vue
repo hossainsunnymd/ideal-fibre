@@ -83,16 +83,6 @@ function toggleSidebar() {
 
                 <li>
                     <Link
-                        href="/order-history-page"
-                        class="flex items-center px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-900"
-                    >
-                        <span class="material-icons">history</span>
-                        <span class="ml-3">Order History</span>
-                    </Link>
-                </li>
-
-                <li>
-                    <Link
                         href="/delivery-history-page"
                         class="flex items-center px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-900"
                     >

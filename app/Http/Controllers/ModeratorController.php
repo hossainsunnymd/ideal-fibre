@@ -13,12 +13,13 @@ class ModeratorController extends Controller
 {
     public function moderatorDashboard(){
 
-        $invoice=InvoiceProduct::with('invoice','invoice.customer','product')->get();
+        $invoice=InvoiceProduct::where('incomplete_work_order','>',0)->with('invoice','invoice.customer','product')->get();
 
         return Inertia::render('Dashboard/ModaratorDashboard',['invoice'=>$invoice]);
     }
 
     public function deliviredWorkOrder(Request $request){
+
         DB::beginTransaction();
         try{
             $id=$request->query('id');
@@ -29,12 +30,12 @@ class ModeratorController extends Controller
                 'incomplete_work_order'=>$currentInCompleteWorkOrder-$request->query('orderQty'),
             ]);
 
-            CompleteWorkOrder::where('id','=',$id)->create([
+            CompleteWorkOrder::create([
                 'delivered_work_order'=>$request->query('orderQty'),
                 'pending_work_order'=>InvoiceProduct::where('id','=',$id)->first()->incomplete_work_order,
                 'work_order'=>InvoiceProduct::where('id','=',$id)->first()->qty,
                 'delivered_by'=>$request->query('delivered_by'),
-                'invoice_id'=>InvoiceProduct::where('id','=',$id)->first()->invoice_id,
+                'invoice_product_id'=>$id,
                 'product_id'=>InvoiceProduct::where('id','=',$id)->first()->product_id
             ]);
             DB::commit();
@@ -43,8 +44,5 @@ class ModeratorController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-
-
-
     }
 }

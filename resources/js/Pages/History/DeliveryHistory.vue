@@ -1,21 +1,22 @@
 <script setup>
 import SideNavLayout from '../../Layout/SideNavLayout.vue';
 import { ref } from "vue";
-import { usePage } from "@inertiajs/vue3";
+import { usePage,Link } from "@inertiajs/vue3";
 
 const page = usePage();
 const searchValue = ref();
-const searchField = ref(["invoice.customer.name", "invoice_id"]);
+const searchField = ref(["invoice_product.invoice.customer.name", "invoice_product.invoice.id"]);
 const headers = [
     { text: "No", value: "id" },
-    { text: "Party Name", value: "invoice.customer.name", sortable: true },
+    { text: "Party Name", value: "invoice_product.invoice.customer.name", sortable: true },
     { text: "Description", value: "product.decription", sortable: true },
-    { text: "Invoice no", value: "invoice_id", sortable: true },
+    { text: "Invoice no", value: "invoice_product.invoice.id", sortable: true },
     { text: "Work Order", value: "work_order", sortable: true },
     { text: "Delivered Work Order", value: "delivered_work_order", sortable: true },
     { text: "Pending Work Order", value: "pending_work_order", sortable: true },
     { text: "Delivered By", value: "delivered_by" },
     { text: "Delivered Date", value: "delivery_date", sortable: true },
+    { text: "Action", value: "action"},
 ];
 
 const items = ref(page.props.list);
@@ -47,6 +48,15 @@ const formatDate = (date) => {
         >
             <template #item-delivery_date="{ created_at }">
                 {{ formatDate(created_at) }}
+            </template>
+
+               <template #item-action="{ id }">
+                <Link
+                    :href="`/order-save-page?id=${id}`"
+                    class="bg-green-500 ml-1 text-white font-bold py-2 px-4 rounded"
+                >
+                    Edit
+                </Link>
             </template>
         </EasyDataTable>
     </div>

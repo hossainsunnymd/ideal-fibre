@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('complete_work_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('invoice_id');
+            $table->unsignedBigInteger('invoice_product_id');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')
+            $table->foreign('invoice_product_id')->references('id')->on('invoice_products')
             ->restrictOnDelete()->cascadeOnUpdate();
             $table->foreign('product_id')->references('id')->on('products')
             ->restrictOnDelete()->cascadeOnUpdate();

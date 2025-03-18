@@ -20,6 +20,8 @@ const headers = [
     { text: "Action", value: "action" },
 ];
 
+console.log(page.props.invoice);
+
 const items = ref(page.props.invoice);
 const showModal = ref(false);
 const invoiceProductid=ref();
@@ -77,7 +79,7 @@ const updateOrder = () => {
 </div>
 
     <div class="p-4 bg-[#f8f8f8]">
-        <h1 class="text-2xl font-bold mb-4">Product List</h1>
+        <h1 class="text-2xl font-bold mb-4">Order List</h1>
         <input
             v-model="searchValue"
             type="text"
@@ -101,12 +103,7 @@ const updateOrder = () => {
                 >
                     Complete
                 </button>
-                <Link
-                    :href="`/order-save-page?id=${id}`"
-                    class="bg-green-500 ml-1 text-white font-bold py-2 px-4 rounded"
-                >
-                    Edit
-                </Link>
+
             </template>
 
         </EasyDataTable>

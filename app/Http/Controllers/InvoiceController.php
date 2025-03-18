@@ -89,13 +89,5 @@ class InvoiceController extends Controller
         }
     }
 
-    public function updateWorkOrder(Request $request){
-        $completeWorkOrder=$request->input('complete_work_order');
-        $incompleteWorkOrder=$request->input('incomplete_work_order');
-        InvoiceProduct::where('id','=',$request->input('id'))->update([
-            'complete_work_order'=>$completeWorkOrder,
-            'incomplete_work_order'=>$incompleteWorkOrder
-        ]);
-        return redirect()->back()->with(['status'=>true,'message'=>'Work order updated successfully']);
-    }
+
 }

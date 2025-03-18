@@ -9,8 +9,8 @@ let params=new URLSearchParams(window.location.search);
 let id=params.get('id');
 let list = page.props.order;
 const form = useForm({
-    complete_work_order: list.complete_work_order,
-    incomplete_work_order: list.incomplete_work_order,
+    delivered_work_order: list.delivered_work_order,
+    pending_work_order: list.pending_work_order,
     id: id
 
 })
@@ -27,7 +27,7 @@ const submitForm = () => {
             if(page.props.flash.status===true){
                 toaster.success(page.props.flash.message);
                 setTimeout(() => {
-                    router.get("/order-history-page");
+                    router.get("/delivery-history-page");
                 },500);
             }
             else {
@@ -46,13 +46,13 @@ const submitForm = () => {
     <form @submit.prevent="submitForm"  class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
       <input type="text" v-model="form.id" hidden  name="id">
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="incomplete-work-order">Incomplete Work Order</label>
-        <input v-model="form.incomplete_work_order" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="delivered-work-order">Delivered Work Order</label>
+        <input v-model="form.delivered_work_order" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           type="text">
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="complete-work-order">Complete Work Order</label>
-        <input v-model="form.complete_work_order" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="pending-work-order">Pending Work Order</label>
+        <input v-model="form.pending_work_order" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           type="text" >
       </div>
       <button type="submit"

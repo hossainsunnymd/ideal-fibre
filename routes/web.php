@@ -70,9 +70,8 @@ Route::middleware([SessionAuthenticateMiddleware::class,AdminMiddleware::class])
     Route::get('/delete-invoice', [InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
 
     //update work order
-    Route::post('/update-work-order', [InvoiceController::class, 'updateWorkOrder'])->name('updateWorkOrder');
+    Route::post('/update-work-order', [HistoryController::class, 'updateWorkOrder'])->name('updateWorkOrder');
 
-;
 });
 
 // ================== Page Routes ==================

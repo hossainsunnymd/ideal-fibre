@@ -12,11 +12,11 @@ class CompleteWorkOrder extends Model
         'delivered_work_order',
         'pending_work_order',
         'delivered_by',
-        'invoice_id',
+        'invoice_product_id',
         'product_id'
     ];
-    public function invoice(){
-        return $this->belongsTo(Invoice::class);
+    public function invoiceProduct(){
+        return $this->belongsTo(InvoiceProduct::class);
     }
 
     public function product(){
